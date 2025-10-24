@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    Outseta?: any;
+  }
+}
+
 "use client";
 
 import Image from "next/image";
