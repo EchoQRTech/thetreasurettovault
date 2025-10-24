@@ -1,11 +1,4 @@
-
 "use client";
-
-declare global {
-  interface Window {
-    Outseta?: any;
-  }
-}
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -59,15 +52,6 @@ function Navbar() {
   const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.95]);
   const height = useTransform(scrollY, [0, 100], [96, 72]);
 
-  // ✅ Add a login handler that opens Outseta modal
-  const handleLogin = () => {
-    if (typeof window !== "undefined" && window.Outseta) {
-      window.Outseta.showLogin();
-    } else {
-      alert("Login system loading… please try again in a moment.");
-    }
-  };
-
   return (
     <motion.header
       style={{ backgroundColor: `rgba(0,0,0,${bgOpacity})`, height }}
@@ -75,7 +59,7 @@ function Navbar() {
       className="sticky top-0 z-50 backdrop-blur-2xl border-b border-gold/20 shadow-[0_0_35px_rgba(209,181,115,0.15)]"
     >
       <nav className="max-w-[95rem] mx-auto flex items-center justify-between px-14 h-full">
-        {/* Large Centered Logo */}
+        {/* Logo */}
         <motion.div
           animate={{ scale: [1, 1.05, 1], opacity: [0.9, 1, 0.9] }}
           transition={{ repeat: Infinity, duration: 6 }}
@@ -103,29 +87,34 @@ function Navbar() {
               <span className="absolute left-1/2 -bottom-2 w-0 h-[2px] bg-gradient-to-r from-[#b8944a] to-[#f6e6b2] group-hover:w-full group-hover:left-0 transition-all duration-500 ease-out rounded-full" />
             </li>
           ))}
-
-          {/* 🟩 Login Button integrated with Outseta */}
-          <li>
-            <button
-              onClick={handleLogin}
-              className="text-gold/80 hover:text-gold font-semibold transition-all duration-300"
-            >
-              Login
-            </button>
-          </li>
         </ul>
 
-        {/* Unlock Button */}
-        <a
-          href="#unlock"
-          className="ml-8 rounded-2xl border border-gold bg-gradient-to-b from-[#d1b57340] to-[#d1b57320] px-8 py-3 text-lg text-gold font-semibold tracking-wide shadow-[inset_0_0_8px_rgba(209,181,115,0.25),0_0_25px_rgba(209,181,115,0.3)] hover:shadow-[inset_0_0_15px_rgba(209,181,115,0.4),0_0_55px_rgba(209,181,115,0.55)] transition-all duration-500"
-        >
-          Unlock
-        </a>
+        {/* Right Section — Auth Buttons */}
+        <div className="flex items-center gap-5">
+          {/* Login opens Outseta modal */}
+          <button
+            onClick={() =>
+              (window.location.href =
+                "https://treasuretto-llc.outseta.com/auth?widgetMode=login#o-anonymous")
+            }
+            className="rounded-xl border border-gold/30 text-gold/90 px-6 py-2.5 text-sm hover:bg-gold/10 transition-all duration-300"
+          >
+            Login
+          </button>
+
+          {/* Unlock / Signup button */}
+          <a
+            href="https://treasuretto-llc.outseta.com/auth?widgetMode=register#o-anonymous"
+            className="rounded-2xl border border-gold bg-gradient-to-b from-[#d1b57340] to-[#d1b57320] px-8 py-3 text-lg text-gold font-semibold tracking-wide shadow-[inset_0_0_8px_rgba(209,181,115,0.25),0_0_25px_rgba(209,181,115,0.3)] hover:shadow-[inset_0_0_15px_rgba(209,181,115,0.4),0_0_55px_rgba(209,181,115,0.55)] transition-all duration-500"
+          >
+            Unlock
+          </a>
+        </div>
       </nav>
     </motion.header>
   );
 }
+
 
 /* ---------------- HERO ---------------- */
 type GlowButtonProps = {
