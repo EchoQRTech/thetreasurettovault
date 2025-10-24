@@ -47,10 +47,19 @@ export default function Page() {
 
 /* ---------------- NAVBAR ---------------- */
 function Navbar() {
-  const links = ["Features", "Pricing", "Contact", "Login"];
+  const links = ["Features", "Pricing", "Contact"];
   const { scrollY } = useScroll();
   const bgOpacity = useTransform(scrollY, [0, 100], [0.6, 0.95]);
   const height = useTransform(scrollY, [0, 100], [96, 72]);
+
+  // ✅ Add a login handler that opens Outseta modal
+  const handleLogin = () => {
+    if (typeof window !== "undefined" && window.Outseta) {
+      window.Outseta.showLogin();
+    } else {
+      alert("Login system loading… please try again in a moment.");
+    }
+  };
 
   return (
     <motion.header
@@ -87,6 +96,16 @@ function Navbar() {
               <span className="absolute left-1/2 -bottom-2 w-0 h-[2px] bg-gradient-to-r from-[#b8944a] to-[#f6e6b2] group-hover:w-full group-hover:left-0 transition-all duration-500 ease-out rounded-full" />
             </li>
           ))}
+
+          {/* 🟩 Login Button integrated with Outseta */}
+          <li>
+            <button
+              onClick={handleLogin}
+              className="text-gold/80 hover:text-gold font-semibold transition-all duration-300"
+            >
+              Login
+            </button>
+          </li>
         </ul>
 
         {/* Unlock Button */}
