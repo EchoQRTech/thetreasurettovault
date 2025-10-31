@@ -1,0 +1,170 @@
+/* -----------------------------------------------------------
+   Tailwind Base Imports
+----------------------------------------------------------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------------------------------------
+   GLOBAL BASE STYLES
+----------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  font-family: "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  @apply antialiased;
+}
+
+/* -----------------------------------------------------------
+   THEME SYSTEM
+   .theme-dark — Vault Landing aesthetic
+   .theme-light — Dashboard / Academy / Nexus AI
+----------------------------------------------------------- */
+
+/* 🌑 DARK THEME */
+.theme-dark {
+  @apply bg-[#0a0a0a] text-[#d1b573];
+  color-scheme: dark;
+  background-color: #0a0a0a;
+}
+
+/* ☀️ LIGHT THEME */
+.theme-light {
+  @apply text-[#0a0a0a];
+  color-scheme: light;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fff9f9 30%,
+    #fff5f7 60%,
+    #fef1f3 100%
+  );
+}
+
+/* Optional utility background gradient for Vault visuals */
+.bg-vault-grad {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fff9f9 25%,
+    #fff4f6 55%,
+    #fef0f2 100%
+  );
+}
+
+/* -----------------------------------------------------------
+   NAV LINKS (gold underline hover effect)
+----------------------------------------------------------- */
+.navlink {
+  position: relative;
+  text-decoration: none;
+}
+
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 1px;
+  width: 0%;
+  background-color: #d1b573;
+  transition: width 0.25s ease, background-color 0.3s ease;
+}
+
+.navlink:hover::after {
+  width: 100%;
+  background-color: #e8d9b0;
+}
+
+/* -----------------------------------------------------------
+   REVEAL ANIMATION
+----------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: rise 0.6s ease forwards;
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -----------------------------------------------------------
+   BUTTONS & CARDS
+----------------------------------------------------------- */
+.btn-primary {
+  @apply bg-[#A00028] text-white font-medium rounded-lg transition-all duration-300;
+  box-shadow: 0 3px 15px rgba(160, 0, 40, 0.35);
+}
+
+.btn-primary:hover {
+  background-color: #850020;
+  box-shadow: 0 0 25px rgba(160, 0, 40, 0.45);
+}
+
+.card {
+  @apply rounded-3xl bg-white/90 backdrop-blur-2xl border border-white/50 shadow-[0_10px_40px_rgba(0,0,0,0.05)];
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 15px 45px rgba(160, 0, 40, 0.15);
+  transform: translateY(-3px);
+}
+
+/* -----------------------------------------------------------
+   TYPOGRAPHY (luxury, clear hierarchy)
+----------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  @apply font-bold leading-tight;
+}
+
+p {
+  @apply leading-relaxed text-[15.5px];
+}
+
+/* -----------------------------------------------------------
+   UI POLISH
+----------------------------------------------------------- */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+/* -----------------------------------------------------------
+   SCROLLBAR STYLING
+----------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(160, 0, 40, 0.5);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 0, 40, 0.7);
+}
